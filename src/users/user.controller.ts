@@ -15,7 +15,7 @@ export class UsersController {
         return this.usersService.findOne(id);
     }
 
-    @Patch()
+    @Patch(':id')
     @ApiOperation({ summary: 'Update an user' })
     @ApiBody({ type: UpdateUserDto })
     async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
@@ -26,7 +26,7 @@ export class UsersController {
         return user;
     }
 
-    @Delete()
+    @Delete(':id')
     @ApiOperation({ summary: 'Delete a user' })
     @ApiParam({ name: 'id', description: 'User ID', example: '6123456789abcdef0123456' })
     async delete(@Param('id') id: string): Promise<User> {

@@ -15,13 +15,6 @@ import { Track } from './entities/track.entity';
 export class TracksController {
   constructor(private readonly tracksService: TracksService) {}
 
-  @Post()
-  @ApiOperation({ summary: 'Create track' })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  async create(@Body() createTrackDto: CreateTrackDto): Promise<Track> {
-    return this.tracksService.create(createTrackDto);
-  }
-
   @Get()
   findAll(): Promise<Track[]> {
     return this.tracksService.findAll();

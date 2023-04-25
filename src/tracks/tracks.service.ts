@@ -14,20 +14,6 @@ export class TracksService {
         private albumModel: Model<AlbumDocument>,
     ) {}
 
-    async create(createTrackDto: CreateTrackDto): Promise<Track> {
-        const { title, time, album } = createTrackDto;
-        const createdTrack = new this.trackModel({ title, time, album: album });
-        const albumDoc = await this.albumModel.findOne({ id: createTrackDto.album }).exec();
-        if (!albumDoc) {
-            throw new NotFoundException(`Album with ID ${createTrackDto.album} not found`);
-        }
-        createdTrack.album = albumDoc.id;
-        await createdTrack.save();
-        await albumDoc.save();
-        return createdTrack;
-    }
-
-
     async findOne(id: string): Promise<Track> {
         return this.trackModel.findById(id).exec();
     }
